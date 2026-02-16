@@ -144,10 +144,17 @@ do
             otherSize = otherSize + #v
         end
     end
+    local state = "Unknown"
+    for k, v in pairs(G.STATES or {}) do
+        if v == G.STATE then
+            state = k
+            break
+        end
+    end
     if otherSize ~= 0 then
-        love.graphics.print(string.format("Current FPS: %d\nBase event queue: %d\nOther event queues: %d", fps, #(G.E_MANAGER.queues and G.E_MANAGER.queues.base or {}), otherSize), 10, 10)
+        love.graphics.print(string.format("Current FPS: %d\nBase event queue: %d\nOther event queues: %d\nCurrent state: %s (%d)", fps, #(G.E_MANAGER.queues and G.E_MANAGER.queues.base or {}), otherSize, state, G.STATE), 10, 10)
     else
-        love.graphics.print(string.format("Current FPS: %d\nBase event queue: %d", fps, #(G.E_MANAGER.queues and G.E_MANAGER.queues.base or {})), 10, 10)
+        love.graphics.print(string.format("Current FPS: %d\nBase event queue: %d\nCurrent state: %s (%d)", fps, #(G.E_MANAGER.queues and G.E_MANAGER.queues.base or {}), state, G.STATE), 10, 10)
     end
 end
 '''
